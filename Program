@@ -1,0 +1,31 @@
+from time import sleep
+
+def light(list):
+    lt = 0
+    light_list = []
+    while lt < 8:
+        lt2 = 0
+        while lt2 < 8:
+            if list[lt2] == lt:
+                light_list.append("●")
+            else:
+                light_list.append("-")
+            lt2 += 1
+        lt += 1
+
+    return light_list
+
+l = [7,7,7,7,7,7,7,7]
+while True:
+    temp = int(input("気温 = ")) # ここを気温を取得する関数に置き換え
+    temp = 35 - temp
+    if temp < 0:
+        temp = 0
+    elif 7 < temp:
+        temp = 7
+    del l[0]
+    l.append(temp)
+
+    print(light(l)) #ここを光らせる関数に置き換え
+
+    sleep(1)
