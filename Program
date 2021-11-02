@@ -29,3 +29,20 @@ while True:
     print(light(l)) #ここを光らせる関数に置き換え
 
     sleep(1)
+
+
+---------------------------------------------------------------------------
+
+from time import sleep
+from PIL import Image
+
+im = Image.open('hari.png')
+
+while True:
+    rotate = float(input("角度 = ")) # ここを角度取得する関数に
+    im_rotate = im.rotate(45 + -1 * rotate)
+
+    im_rotate.save('hari_rotated.png')
+
+    # ここで画像を表示
+    sleep(0.2)
