@@ -49,7 +49,6 @@ while True:
     clear_rotate = n - rotate
     if clear_rotate < 0:
         clear_rotate = clear_rotate + 360
-A
     if int(clear_rotate) == int(mae_rotate):
         continue
 
