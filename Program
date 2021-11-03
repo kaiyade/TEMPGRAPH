@@ -38,11 +38,73 @@ from PIL import Image
 
 im = Image.open('hari.png')
 
+
+mae_rotate = 0
 while True:
-    rotate = float(input("角度 = ")) # ここを角度取得する関数に
-    im_rotate = im.rotate(45 + -1 * rotate)
+    n = float(input("角度 = ")) # ここを角度取得する関数に
 
-    im_rotate.save('hari_rotated.png')
+    rotate = -45
+    if rotate < 0:
+        rotate = 360 + rotate
+    clear_rotate = n - rotate
+    if clear_rotate < 0:
+        clear_rotate = clear_rotate + 360
+A
+    if int(clear_rotate) == int(mae_rotate):
+        continue
 
-    # ここで画像を表示
-    sleep(0.2)
+    rotate2 = rotate
+    m_time = 0
+    while int(abs(rotate2 - clear_rotate)) >= 1:
+        if int(abs(rotate2 - clear_rotate)) >= 7:
+            rotate2 -= 6
+        else:
+            rotate2 -= 1
+        if rotate2 < 0:
+            rotate2 = 360 + rotate2
+        m_time += 1
+
+    rotate2 = rotate
+    p_time = 0
+    while int(abs(rotate2 - clear_rotate)) >= 1:
+        if int(abs(rotate2 - clear_rotate)) >= 7:
+            rotate2 += 6
+        else:
+            rotate2 += 1
+        if rotate2 > 360:
+            rotate2 = 360 - rotate2
+        p_time += 1
+
+    print(m_time, p_time)
+    while int(abs(rotate - clear_rotate)) >= 1:
+        if m_time <= p_time:
+            if int(abs(rotate - clear_rotate)) >= 7:
+                rotate -= 6
+            else:
+                rotate -= 1
+            if rotate < 0:
+                rotate = 360 + rotate
+        else:
+            if int(abs(rotate - clear_rotate)) >= 7:
+                rotate += 6
+            else:
+                rotate += 1
+            if rotate > 360:
+                rotate = 360 - rotate
+            m_time += 1
+
+        im_rotate = im.rotate(rotate)
+
+
+        print(rotate)
+        try:
+            im_rotate.save('hari_rotated.png')
+            # ここで画像を表示
+        except:
+            print("miss")
+        sleep(0.1)
+
+    mae_rotate = clear_rotate
+
+
+
