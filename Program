@@ -106,4 +106,86 @@ while True:
     mae_rotate = clear_rotate
 
 
+-----------------------------------------------------------------------------
 
+from time import sleep
+from PIL import Image
+
+im = Image.open('hari.png')
+
+rotate = -45
+if rotate < 0:
+    rotate = 360 + rotate
+
+mae_rotate = 0
+while True:
+    n = float(input("角度 = ")) # ここを角度取得する関数に
+    if int(rotate) == int(n):
+        continue
+
+
+    clear_rotate = n + 45
+    if clear_rotate > 360:
+        clear_rotate = clear_rotate - 360
+
+
+
+    rotate2 = rotate
+    m_time = 0
+    while int(abs(rotate2 - clear_rotate)) >= 1:
+        if int(abs(rotate2 - clear_rotate)) >= 5:
+            rotate2 -= 6
+        else:
+            rotate2 -= 1
+        if rotate2 <= 0:
+            rotate2 = 360 + rotate2
+        m_time += 1
+        if m_time > 100:
+            m_time = 0
+            break
+
+    rotate2 = rotate
+    p_time = 0
+    while int(abs(rotate2 - clear_rotate)) >= 1:
+        if int(abs(rotate2 - clear_rotate)) >= 5:
+            rotate2 += 6
+        else:
+            rotate2 += 1
+        if rotate2 >= 360:
+            rotate2 = 360 - rotate2
+        p_time += 1
+        if p_time > 100:
+            p_time = 0
+            break
+
+    while int(abs(rotate - clear_rotate)) >= 1:
+        if m_time == 0 or p_time == 0:
+            break
+        if m_time <= p_time:
+            if int(abs(rotate - clear_rotate)) >= 5:
+                rotate -= 6
+            else:
+                rotate -= 1
+            if rotate <= 0:
+                rotate = 360 + rotate
+        else:
+            if int(abs(rotate - clear_rotate)) >= 5:
+                rotate += 6
+            else:
+                rotate += 1
+            if rotate >= 360:
+                rotate = 360 - rotate
+            m_time += 1
+
+        im_rotate = im.rotate(rotate)
+
+
+        print(rotate)
+        try:
+            im_rotate.save('hari_rotated.png')
+            # ここで画像を表示
+        except:
+            print("miss")
+        sleep(0.1)
+
+    mae_rotate = clear_rotate
